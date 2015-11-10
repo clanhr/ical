@@ -39,20 +39,29 @@
                (str/split result #"\n")))))
 
     (testing "absences->ical-object"
-      (let [result (absences-to-ical [{:start-date "2015-11-15"
-                                       :end-date "2015-11-20"}
-                                      {:start-date "2015-12-15"
-                                       :end-date "2015-12-20"}])]
+      (let [result (absences-to-ical [{:_id 1
+                                       :start-date "20151210"
+                                       :end-date "20151212"
+                                       :state "cancelled"}
+                                      {:_id 2
+                                       :start-date "20151215"
+                                       :end-date "20151220"
+                                       :state "approved"}])]
+        (println result)
         (is (= ["BEGIN:VCALENDAR\r"
                 "BEGIN:VEVENT\r"
                 "SUMMARY:holidays\r"
-                "DTSTART:2015-11-15\r"
-                "DTEND:2015-11-20\r"
+                "UID:1\r"
+                "DTSTART:20151210\r"
+                "DTEND:20151212\r"
+                "STATUS:cancelled\r"
                 "END:VEVENT\r"
                 "BEGIN:VEVENT\r"
                 "SUMMARY:holidays\r"
-                "DTSTART:2015-12-15\r"
-                "DTEND:2015-12-20\r"
+                "UID:2\r"
+                "DTSTART:20151215\r"
+                "DTEND:20151220\r"
+                "STATUS:approved\r"
                 "END:VEVENT\r"
                 "END:VCALENDAR\r"]
                (str/split result #"\n")))))))

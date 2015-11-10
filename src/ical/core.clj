@@ -107,9 +107,12 @@
 (defn prepare-absence
   [absence]
   [:vevent [:summary "holidays"]
+           [:uid (:_id absence)]
            [:dtstart (:start-date absence)]
-           [:dtend (:end-date absence)]])
+           [:dtend (:end-date absence)]
+           [:status (:state absence)]])
 
 (defn absences->ical-object
   [absences]
-  (write-object (concat [:vcalendar] (mapv prepare-absence absences))))
+  (write-object (concat [:vcalendar]
+                        (mapv prepare-absence absences))))
