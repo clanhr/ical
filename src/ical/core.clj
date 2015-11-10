@@ -104,7 +104,12 @@
             ":"
             (reduce str (interpose "," (map format-value (flatten values))))))))))
 
+(defn prepare-absence
+  [absence]
+  [:vevent [:summary "holidays"]
+           [:dtstart (:start-date absence)]
+           [:dtend (:end-date absence)]])
+
 (defn absences->ical-object
   [absences]
-  ;(write-object (map absences ))
-  )
+  (write-object (concat [:vcalendar] (mapv prepare-absence absences))))

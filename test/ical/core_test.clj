@@ -5,7 +5,8 @@
 
 (deftest test-ical
   (letfn
-    [(to-ical [input] (with-out-str (core/write-object input)))]
+    [(to-ical [input] (with-out-str (core/write-object input)))
+     (absences-to-ical [input] (with-out-str (core/absences->ical-object input)))]
 
     (testing "Properties"
       (is "VERSION:2.0" (to-ical [:version "2.0"])))
@@ -33,6 +34,25 @@
                 "END:VEVENT\r"
                 "BEGIN:VEVENT\r"
                 "SUMMARY:CHUCK\r"
+                "END:VEVENT\r"
+                "END:VCALENDAR\r"]
+               (str/split result #"\n")))))
+
+    (testing "absences->ical-object"
+      (let [result (absences-to-ical [{:start-date "2015-11-15"
+                                       :end-date "2015-11-20"}
+                                      {:start-date "2015-12-15"
+                                       :end-date "2015-12-20"}])]
+        (is (= ["BEGIN:VCALENDAR\r"
+                "BEGIN:VEVENT\r"
+                "SUMMARY:holidays\r"
+                "DTSTART:2015-11-15\r"
+                "DTEND:2015-11-20\r"
+                "END:VEVENT\r"
+                "BEGIN:VEVENT\r"
+                "SUMMARY:holidays\r"
+                "DTSTART:2015-12-15\r"
+                "DTEND:2015-12-20\r"
                 "END:VEVENT\r"
                 "END:VCALENDAR\r"]
                (str/split result #"\n")))))))
