@@ -103,3 +103,8 @@
             (reduce str (interpose ";" (cons n (serialize-params params))))
             ":"
             (reduce str (interpose "," (map format-value (flatten values))))))))))
+
+(defn absences->ical-object
+  [absences]
+  ;(write-object (map absences ))
+  )

@@ -22,4 +22,17 @@
                 "END:VEVENT\r"
                 "END:VCALENDAR\r"]
                (str/split result #"\n")
-               ))))))
+               ))))
+
+    (testing "Object structure with multiple values"
+      (let [result (to-ical [:vcalendar [:vevent [:summary "Bubu Master Boss"]]
+                                        [:vevent [:summary "CHUCK"]]])]
+        (is (= ["BEGIN:VCALENDAR\r"
+                "BEGIN:VEVENT\r"
+                "SUMMARY:Bubu Master Boss\r"
+                "END:VEVENT\r"
+                "BEGIN:VEVENT\r"
+                "SUMMARY:CHUCK\r"
+                "END:VEVENT\r"
+                "END:VCALENDAR\r"]
+               (str/split result #"\n")))))))
