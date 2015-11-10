@@ -9,6 +9,7 @@
 
     (testing "Properties"
       (is "VERSION:2.0" (to-ical [:version "2.0"])))
+
     (testing "Multiple parameters"
       (is "ATTENDEE;RSVP=TRUE;ROLE=REQ-PARTICIPANT:MAILTO:bubu@mail.com"
           (to-ical [:attendee {:rsvp true :role "req-participant"} "MAILTO:bubu@mail.com"])))

@@ -27,8 +27,6 @@
     (throw (Exception. "Parameter value cannot contain a double-quote")))
   x)
 
-;; ## Value and property parameter printing.
-
 ;; 4.1.1 Property parameters with values containing a COLON, a
 ;; SEMICOLON or a COMMA character MUST be placed in quoted text.
 (defn quote-if-necessary [x]
