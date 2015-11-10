@@ -110,7 +110,7 @@
            [:uid (:_id absence)]
            [:dtstart (:start-date absence)]
            [:dtend (:end-date absence)]
-           [:status (:state absence)]])
+           [:status (:status absence)]])
 
 (defn absences->ical-object
   [absences]

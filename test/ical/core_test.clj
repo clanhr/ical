@@ -42,12 +42,11 @@
       (let [result (absences-to-ical [{:_id 1
                                        :start-date "20151210"
                                        :end-date "20151212"
-                                       :state "cancelled"}
+                                       :status "cancelled"}
                                       {:_id 2
                                        :start-date "20151215"
                                        :end-date "20151220"
-                                       :state "approved"}])]
-        (println result)
+                                       :status "approved"}])]
         (is (= ["BEGIN:VCALENDAR\r"
                 "BEGIN:VEVENT\r"
                 "SUMMARY:holidays\r"
