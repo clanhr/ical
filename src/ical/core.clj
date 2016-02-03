@@ -93,7 +93,7 @@
           parent? (true?
                     (some #(and (vector? %) (keyword? (first %)))
                           values))]
-      (if parent?
+      (if (or parent? (= 1 (count obj)))
         (do
           (println (str "BEGIN:" n))
           (doall (for [e values] (write-object e)))
