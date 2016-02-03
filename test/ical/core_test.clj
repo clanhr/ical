@@ -63,4 +63,10 @@
                 "STATUS:approved\r"
                 "END:VEVENT\r"
                 "END:VCALENDAR\r"]
+               (str/split result #"\n")))))
+
+    (testing "empty calendar"
+      (let [result (absences-to-ical [])]
+        (is (= ["BEGIN:VCALENDAR\r"
+                "END:VCALENDAR\r"]
                (str/split result #"\n")))))))
